@@ -11,3 +11,11 @@ def genwoid():
         filepath = Path(filename)
     return filepath
     
+def newwo():
+    fields = ["Name","Mobile","Landline","Email","Address","Make","Model","Serial","Issue","Password"]
+    with open(genwoid(),"wt") as fin:
+        for field in fields:
+            fin.write(field+": "+input(field+": ")+"\n")
+
+
+newwo()
