@@ -12,8 +12,16 @@ def genwoid():
     return filepath
     
 def newwo():
-    fields = ["Status","Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password"]
-    with open(genwoid(),"wt") as fin:
+    fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password"]
+    with open(genwoid(),"wt") as f:
         for field in fields:
-            fin.write(field+": "+input(field+": ")+"\n")
+            f.write(field+": "+input(field+": ")+"\n")
 
+def updatewo(woid):
+    with open(str(woid)+".txt","at") as f:
+        status = input("Please input status as number between 1 and 4.\n\t0)Waiting for bench.\n\t1)In Progress\n\t2)On Hold\n\t3)Ready\n\t4)Checked Out\n\t5)Ambandoned\n:>>")
+        note = input("Please add note:\n")
+
+        update = "\nStatus: "+status+"\nNote:\n"+"-"*5+"\n"+note
+
+        f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
