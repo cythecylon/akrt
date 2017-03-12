@@ -12,10 +12,8 @@ def genwoid():
     return filepath
     
 def newwo():
-    fields = ["Name","Mobile","Landline","Email","Address","Make","Model","Serial","Issue","Password"]
+    fields = ["Status","Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password"]
     with open(genwoid(),"wt") as fin:
         for field in fields:
             fin.write(field+": "+input(field+": ")+"\n")
 
-
-newwo()
