@@ -14,7 +14,7 @@ def genwoid():
     return filepath
     
 def newwo():
-    fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password"]
+    fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
     with open(genwoid(),"wt") as f:
         f.write("Booked In: "+time.strftime("%c")+"\n")
         for field in fields:
@@ -30,6 +30,7 @@ def updatewo(woid):
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
+
 def main(argv):
     try:
         if argv[0] == 'new':
@@ -41,4 +42,4 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-    
+   
