@@ -29,11 +29,13 @@ def updatewo(woid):
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
 def main(argv):
-    if argv[0] == 'new':
-        newwo()
-    if argv[0] == 'update':
-        updatewo(argv[1])
-
+    try:
+        if argv[0] == 'new':
+            newwo()
+        if argv[0] == 'update':
+            updatewo(argv[1])
+    except IndexError:
+        print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\n")
 if __name__ == "__main__":
     main(sys.argv[1:])
     
