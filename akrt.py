@@ -1,6 +1,7 @@
 import os.path
 import sys
 from pathlib import Path
+import time
 
 def genwoid():
     woid = 1
@@ -24,7 +25,7 @@ def updatewo(woid):
         status = input("Please input status as number between 1 and 4.\n\t0)Waiting for bench.\n\t1)In Progress\n\t2)On Hold\n\t3)Ready\n\t4)Checked Out\n\t5)Ambandoned\n:>>")
         note = input("Please add note:\n")
 
-        update = "\nStatus: "+status+"\nNote:\n"+"-"*5+"\n"+note
+        update = "\n"+time.strftime("%c")+"\nStatus: "+status+"\nNote:\n"+"-"*5+"\n"+note
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
@@ -36,6 +37,7 @@ def main(argv):
             updatewo(argv[1])
     except IndexError:
         print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\n")
+
 if __name__ == "__main__":
     main(sys.argv[1:])
     
