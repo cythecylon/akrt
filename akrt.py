@@ -16,6 +16,7 @@ def genwoid():
 def newwo():
     fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password"]
     with open(genwoid(),"wt") as f:
+        f.write("Booked In: "+time.strftime("%c")+"\n")
         for field in fields:
             f.write(field+": "+input(field+": ")+"\n")
 
