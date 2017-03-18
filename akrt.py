@@ -2,6 +2,9 @@ import os.path
 import sys
 from pathlib import Path
 import time
+from flask import Flask
+
+app = Flask(__name__)
 
 def genwoid():
     woid = 1
@@ -30,6 +33,13 @@ def updatewo(woid):
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
+def getwo(woid):
+    with open(str(woid)+".txt","rt") as f:
+        return f.read()
+
+@app.route("/report/<int:woid>")
+def webreport(woid):
+    return woid
 
 def main(argv):
     try:
@@ -37,6 +47,8 @@ def main(argv):
             newwo()
         if argv[0] == 'update':
             updatewo(argv[1])
+        if argv[0] == 'daemon':
+            app.run()
     except IndexError:
         print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\n")
 
