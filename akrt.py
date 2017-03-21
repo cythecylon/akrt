@@ -33,12 +33,14 @@ def updatewo(woid):
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
+        print("Work Order "+woid+" created successfully")
+
 def getwo(woid):
     with open(str(woid)+".txt","rt") as f:
         values = f.read()
     return values
 
-
+def getonhold():
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
