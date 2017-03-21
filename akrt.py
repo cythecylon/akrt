@@ -35,7 +35,8 @@ def updatewo(woid):
 
 def getwo(woid):
     with open(str(woid)+".txt","rt") as f:
-        return f.read()
+        values = f.read()
+    return values
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
@@ -49,6 +50,8 @@ def main(argv):
             updatewo(argv[1])
         if argv[0] == 'daemon':
             app.run()
+        if argv[0] == 'about':
+            print(getwo(argv[1]))
     except IndexError:
         print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\n")
 
