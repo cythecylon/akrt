@@ -38,9 +38,11 @@ def getwo(woid):
         values = f.read()
     return values
 
+
+
 @app.route("/report/<int:woid>")
 def webreport(woid):
-    return woid
+    return getwo(woid)
 
 def main(argv):
     try:
@@ -53,7 +55,7 @@ def main(argv):
         if argv[0] == 'about':
             print(getwo(argv[1]))
     except IndexError:
-        print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\n")
+        print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\nakrt.py about [woid] - read ticket file \nakrt.py daemon - launch web server")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
