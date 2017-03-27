@@ -21,7 +21,7 @@ def newwo():
     fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
     with open(genwoid(),"wt") as f:
         f.write("Booked In: "+time.strftime("%c")+"\n")
-        f.write("Report Passowrd: "+genpasswd()+"\n") 
+        f.write("Login: "+genpasswd()+"\n") 
         for field in fields:
             f.write(field+": "+input(field+": ")+"\n")
 
@@ -47,8 +47,8 @@ def genpasswd():
 
 def findpasswd(woid):
     for line in open(woid,"rt"):
-        if line.split()[0] == "Report":
-            return line.split()[2]
+        if line.split()[0] == "Login":
+            return line.split()[1]
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
