@@ -45,6 +45,11 @@ def getwo(woid):
 def genpasswd():
     return ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=15))
 
+def findpasswd(woid):
+    for line in open(woid,"rt"):
+        if line.split()[0] == "Report":
+            return line.split()[2]
+
 @app.route("/report/<int:woid>")
 def webreport(woid):
     return getwo(woid)
