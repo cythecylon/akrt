@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 import time
 from flask import Flask
+import random, string
 
 app = Flask(__name__)
 
@@ -20,6 +21,7 @@ def newwo():
     fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
     with open(genwoid(),"wt") as f:
         f.write("Booked In: "+time.strftime("%c")+"\n")
+        f.write("Report Passowrd: "+genpasswd()+"\n") 
         for field in fields:
             f.write(field+": "+input(field+": ")+"\n")
 
@@ -32,15 +34,16 @@ def updatewo(woid):
         update = "\n"+time.strftime("%c")+"\nStatus: "+status+"\nNote:\n"+"-"*5+"\n"+note
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
+   
 
-        print("Work Order "+woid+" created successfully")
 
 def getwo(woid):
     with open(str(woid)+".txt","rt") as f:
         values = f.read()
     return values
 
-def getonhold():
+def genpasswd():
+    return ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=15))
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
