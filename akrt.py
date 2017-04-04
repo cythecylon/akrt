@@ -2,10 +2,12 @@ import os.path
 import sys
 from pathlib import Path
 import time
-from flask import Flask
+from flask import Flask, session, redirect, url_for, escape, request
 import random, string
 
 app = Flask(__name__)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+
 
 def genwoid():
     woid = 1
@@ -20,8 +22,9 @@ def genwoid():
 def newwo():
     fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
     with open(genwoid(),"wt") as f:
-        f.write("Booked In: "+time.strftime("%c")+"\n")
         f.write("Login: "+genpasswd()+"\n") 
+        f.write("Booked In: "+time.strftime("%c")+"\n")
+         
         for field in fields:
             f.write(field+": "+input(field+": ")+"\n")
 
@@ -36,23 +39,11 @@ def updatewo(woid):
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
    
 
-
-def getwo(woid):
-    with open(str(woid)+".txt","rt") as f:
-        values = f.read()
-    return values
-
 def genpasswd():
     return ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=15))
 
-def findpasswd(woid):
-    for line in open(woid,"rt"):
-        if line.split()[0] == "Login":
-            return line.split()[1]
 
-@app.route("/report/<int:woid>")
-def webreport(woid):
-    return getwo(woid)
+
 
 def main(argv):
     try:
