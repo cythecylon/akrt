@@ -33,7 +33,7 @@ def updatewo(woid):
 
         f.write("\n"+"="*24+update+"\n" + "="*24+"\n")
 
-        print("Work Order "+woid+" created successfully")
+        print("Work Order "+woid+" successfully updated")
 
 def getwo(woid):
     with open(str(woid)+".txt","rt") as f:
