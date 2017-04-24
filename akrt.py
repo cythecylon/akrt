@@ -40,7 +40,6 @@ def getwo(woid):
         values = f.read()
     return values
 
-def getonhold():
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
