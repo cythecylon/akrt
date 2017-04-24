@@ -19,7 +19,7 @@ def genwoid():
 statuses = {0:'Waiting for Bench',1:'In Progress',2:'On Hold',3:'Ready',4:'Checked Out',5:'Ambandoned'}
     
 def newwo():
-    fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
+    fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Deadline(HH:MM:DD:MM:YY):"]
     with open(genwoid(),"wt") as f:
         f.write("Booked In: "+time.strftime("%c")+"\n")
         for field in fields:
@@ -47,6 +47,8 @@ def getstatus(woid):
     for line in values:
         if line.split(":")[0]=="Status":
             return line.split(":")[1]
+        else:
+            return 0
 
 
 @app.route("/report/<int:woid>")
