@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Repair Status</title>
+
+		<style>
+			body {
+				text-align:center;
+				font-family:"arial",monospace
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Status:</h1>
+		{% if status %}
+		<p> {{ status }} </p>
+		{% else %}
+			<p> Unable to find status. Please contact store </p>
+		{% endif %}
+	</body>
+</html>
+
+		

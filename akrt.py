@@ -2,7 +2,7 @@ import os.path
 import sys
 from pathlib import Path
 import time
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -15,6 +15,8 @@ def genwoid():
         filename = os.getcwd() + "\\" + str(woid) + ".txt"
         filepath = Path(filename)
     return filepath
+
+statuses = {0:'Waiting for Bench',1:'In Progress',2:'On Hold',3:'Ready',4:'Checked Out',5:'Ambandoned'}
     
 def newwo():
     fields = ["Name","Mobile","Landline","Email","Address","Type(Laptop/Mobile/Tablet/Printer)","Make","Model","Serial","Issue","Password","Deadline(HH:MM:DD:MM:YY):"]
@@ -40,10 +42,22 @@ def getwo(woid):
         values = f.read()
     return values
 
+def getstatus(woid):
+    values = getwo(woid).split("\n")
+    for line in values:
+        if line.split(":")[0]=="Status":
+            return line.split(":")[1]
+
 
 @app.route("/report/<int:woid>")
 def webreport(woid):
-    return getwo(woid)
+    status = statuses[int(getstatus(woid))]
+    return render_template('report.html', status=status)
+
+
+@app.route("/")
+def index():
+    return "Usage: {domain}/report/<woid>"
 
 def main(argv):
     try:
