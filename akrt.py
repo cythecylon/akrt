@@ -71,17 +71,21 @@ def index():
 
 def main(argv):
     """ Checks arguments and handles exception if too many or too few arguments are passed """
+
+    usage = "Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [woid] - update previous ticket\nakrt.py about [woid] - read ticket file \nakrt.py daemon - launch web server"
     try:
         if argv[0] == 'new':
             newwo() # create a new work order
-        if argv[0] == 'update':
+        elif argv[0] == 'update':
             updatewo(argv[1]) # update the work order under the next parameter
-        if argv[0] == 'daemon':
+        elif argv[0] == 'daemon':
             app.run() # run the flask web server
-        if argv[0] == 'about':
-            print(getwo(argv[1])) # prints out the contents of a work order
+        elif argv[0] == 'about':
+            print(getwo(argv[1])) # prints out the contents of a work order 
+        else:
+            print(usage)
     except IndexError:
-        print("Usage:\n"+"-"*6 + "\nakrt.py new - launch new ticket,\nakrt.py update [ticketid] - update previous ticket\nakrt.py about [woid] - read ticket file \nakrt.py daemon - launch web server")
+        print(usage)
 
 # runs main first if script is module is being run standalone.
 if __name__ == "__main__":
